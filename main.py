@@ -1,7 +1,8 @@
+import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = 8447501351:AAFNL7ggNuzqLWbe02TcQFKFN0tGFz9_uX8
+TOKEN = os.getenv8447501351:AAFNL7ggNuzqLWbe02TcQFKFN0tGFz9_uX8
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = (
@@ -12,12 +13,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Эксклюзивные возможности."
     )
 
-    keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("ℹ️ О проекте", callback_data="about")]
-    ])
-
-    await update.message.reply_text(text, reply_markup=keyboard)
+    await update.message.reply_text(text)
 
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
+
 app.run_polling()
